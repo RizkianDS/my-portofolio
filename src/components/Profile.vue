@@ -16,6 +16,14 @@
             <span class="tag">Administration</span>
             <span class="tag">IT</span>
           </div>
+          <a 
+            href="https://drive.google.com/file/d/1JyfO5oBMfC0_nkFy7Pnn_rCldekawxnX/view" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="cv-button"
+          >
+            Lihat CV
+          </a>
         </div>
       </div>
     </div>
@@ -49,7 +57,7 @@ onMounted(() => {
 });
 </script>
 
-<style>
+<style scoped>
 #profile {
   background-color: transparent; 
   padding: 6rem 2rem;
@@ -94,13 +102,16 @@ onMounted(() => {
 
 .profile-image-container img {
   width: 100%;
-  height: 220%;
+  height: 230%;
   object-fit: cover; /* Cover will now work correctly without cropping */
   display: block; /* Remove any extra space below the image */
 }
 
 .profile-info {
     text-align: center; /* Center align all text within the info section */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .profile-info h2 {
@@ -140,6 +151,29 @@ onMounted(() => {
   border-color: #16a085;
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(22, 160, 133, 0.3);
+}
+
+.cv-button {
+  margin-top: 2rem; /* Space above the button */
+  background-color: #16a085;
+  color: white;
+  padding: 0.75rem 1.75rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 800;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(22, 160, 133, 0.4);
+  display: inline-block;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+}
+
+.cv-button:hover {
+  background-color: #19b698;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(22, 160, 133, 0.5);
 }
 
 /* Responsive adjustments */

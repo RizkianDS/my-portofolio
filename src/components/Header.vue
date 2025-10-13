@@ -2,7 +2,7 @@
   <header :class="{ 'scrolled': isScrolled, 'mobile-menu-open': isMobileMenuOpen }">
     <nav>
       <div class="logo-container">
-        <a href="#home" @click.prevent="handleLinkClick('#home')">
+        <a href="#hero" @click.prevent="handleLinkClick('#hero')">
           <img src="/icon.png" alt="Logo" class="logo-img">
           <span class="logo-text">Portofolio</span>
         </a>
@@ -17,7 +17,7 @@
 
       <!-- Navigation Links -->
       <ul class="nav-links">
-        <li><a href="#home" @click.prevent="handleLinkClick('#home')">Home</a></li>
+        <li><a href="#hero" @click.prevent="handleLinkClick('#hero')">Home</a></li>
         <li><a href="#profile" @click.prevent="handleLinkClick('#profile')">Profil</a></li>
         <li><a href="#projects" @click.prevent="handleLinkClick('#projects')">Proyek</a></li>
         <li><a href="#contact" @click.prevent="handleLinkClick('#contact')">Kontak</a></li>
@@ -44,7 +44,6 @@ const toggleMobileMenu = () => {
 
 const handleLinkClick = (selector) => {
   emit('scrollToSection', selector);
-  // Close the mobile menu automatically when a link is clicked
   if (isMobileMenuOpen.value) {
     isMobileMenuOpen.value = false;
   }
@@ -59,7 +58,7 @@ onBeforeUnmount(() => {
 });
 </script>
 
-<style>
+<style scoped>
 /* --- Base Header Styles --- */
 header {
   position: fixed;
@@ -113,9 +112,9 @@ nav {
 .nav-links a {
   text-decoration: none;
   color: #e2e8f0;
-  font-weight: 500;
+  font-weight: 700; /* BOLD TEXT */
   position: relative;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 .nav-links a::after {
@@ -132,6 +131,7 @@ nav {
 
 .nav-links a:hover {
   color: white;
+  text-shadow: 0 0 10px rgba(22, 160, 133, 0.8); /* GLOW EFFECT */
 }
 
 .nav-links a:hover::after {
@@ -145,7 +145,7 @@ nav {
   border: none;
   cursor: pointer;
   padding: 0;
-  z-index: 1100; /* Ensures it's clickable above other content */
+  z-index: 1100;
 }
 
 .hamburger .line {
@@ -159,7 +159,6 @@ nav {
 
 /* --- Responsive Styles (Mobile View) --- */
 @media (max-width: 768px) {
-  /* Show hamburger, hide desktop nav links */
   .hamburger {
     display: block;
   }
@@ -173,13 +172,12 @@ nav {
     background-color: #1a202c;
     position: fixed;
     top: 0;
-    left: 100%; /* Start off-screen */
+    left: 100%;
     width: 100%;
     height: 100vh;
     transition: left 0.4s ease-in-out;
   }
   
-  /* When mobile menu is open, slide it into view */
   header.mobile-menu-open .nav-links {
     left: 0;
   }
@@ -188,7 +186,6 @@ nav {
     font-size: 1.5rem;
   }
   
-  /* Animate Hamburger to an 'X' when menu is open */
   header.mobile-menu-open .hamburger .line:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
   }

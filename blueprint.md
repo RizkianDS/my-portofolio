@@ -19,8 +19,9 @@ Tujuan dari proyek ini adalah untuk membuat website portofolio pribadi yang mode
 *   **Tipografi:** Menggunakan font 'Poppins' untuk keterbacaan yang modern dan elegan.
 *   **Foto Profil:** Foto ditampilkan secara utuh tanpa pemotongan untuk presentasi yang jelas dan profesional.
 *   **Animasi & Transisi:**
-    *   Animasi gulir yang halus (baik melalui CSS maupun JavaScript *fallback*).
-    *   Efek interaktif (hover) pada tombol, tautan, dan kartu proyek.
+    *   **Animasi Gulir Kustom:** Implementasi fungsi gulir JavaScript kustom dengan durasi 1.5 detik untuk transisi yang lambat dan elegan antar bagian.
+    *   **Efek Hover:** Efek interaktif pada tombol, tautan, dan kartu proyek.
+    *   **Animasi Masuk (Hero):** Judul utama dan tombol di bagian Hero muncul dengan efek *fade-in* dan *slide-up* yang berurutan saat halaman dimuat.
     *   **Animasi Scroll-Triggered:**
         *   **Bagian Profil:** Kartu profil muncul dengan efek *fade-in* dan *slide-up* saat memasuki area pandang.
         *   **Bagian Proyek:** Kartu-kartu proyek muncul secara berurutan (*staggered*) dengan efek *fade-in* dan *slide-up*.
@@ -29,27 +30,20 @@ Tujuan dari proyek ini adalah untuk membuat website portofolio pribadi yang mode
 
 *   **Tata Letak "Edge-to-Edge":** Konten membentang 100% lebar layar untuk tampilan yang imersif.
 *   **`Header.vue`:** Navigasi tetap yang **sepenuhnya responsif**. Di layar besar, menampilkan menu horizontal. Di layar kecil (<768px), menu berubah menjadi **ikon "hamburger"** dengan panel menu geser (slide-in) yang dinamis.
-*   **`Hero.vue`:** Bagian pembuka layar penuh dengan gambar latar, teks animasi *typewriter*, dan tombol gulir interaktif.
-*   **`Profile.vue`:** Bagian profil dengan kartu profil menonjol (latar belakang terang), menampilkan **foto profil penuh tanpa terpotong**, dan teks yang kontras.
+*   **`Hero.vue`:** Bagian pembuka layar penuh dengan gambar latar, teks animasi *typewriter*, dan elemen yang dianimasikan saat masuk.
+*   **`Profile.vue`:** Bagian profil dengan kartu profil menonjol (latar belakang terang), menampilkan **foto profil penuh tanpa terpotong**, dan tombol **"Lihat CV"** yang mengarah ke tautan eksternal.
 *   **`Projects.vue`:** Galeri proyek dalam format kartu yang responsif dan beranimasi.
 *   **`Contact.vue`:** Bagian kontak yang juga berfungsi sebagai footer.
 
 ## Rencana Implementasi (Selesai)
 
-1.  **Inisialisasi & Struktur Awal.**
-2.  **Integrasi Aset & Tema.**
-3.  **Kustomisasi Awal & Perbaikan Eror Build.**
-4.  **Penyempurnaan Desain Visual (Tata Letak Edge-to-Edge).**
-5.  **Finalisasi Desain (Ukuran & Bayangan Navbar).**
-6.  **Perbaikan Responsivitas Kritis:** Mengimplementasikan menu navigasi "hamburger".
-7.  **Penyempurnaan Interaktivitas (Animasi):** Menambahkan animasi *scroll-triggered* dan memperbaiki fungsionalitas gulir.
-8.  **Desain Ulang Kartu Profil:** Mengubah kartu profil menjadi tema terang dengan teks gelap dan memastikan foto profil ditampilkan secara utuh.
+Semua fitur yang direncanakan telah berhasil diimplementasikan, disempurnakan, dan divalidasi.
 
 ---
 
-## Tugas Berikutnya
+## Tugas Saat Ini: Publikasi Aplikasi
 
 *   **Tujuan:** Mempersiapkan dan mempublikasikan website portofolio ke Firebase Hosting.
 *   **Langkah-langkah:**
     1.  Jalankan perintah `npm run build` untuk membuat versi produksi dari aplikasi.
-    2.  Gunakan `classic_firebase_hosting_deploy` untuk mempublikasikan konten dari direktori `dist`.
+    2.  Gunakan `classic_firebase_hosting_deploy` untuk mempublikasikan konten dari direktori `dist` yang dihasilkan.

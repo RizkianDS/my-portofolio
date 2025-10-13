@@ -1,177 +1,163 @@
 <template>
-  <section id="home" class="hero">
+  <div id="hero">
     <div class="hero-content">
-      <h1 class="hero-title" :class="{ 'is-visible': isTitleVisible }">Rizkian Dili Septyanto</h1>
-      <p class="hero-subtitle">
-        {{ typedText }}<span class="cursor"></span>
-      </p>
-      <a @click="scrollToProfile" class="hero-button">Lihat Profil Saya</a>
+      <h1 class="animate-fade-in-slide-up">Rizkian Dili Septyanto</h1>
+      <p ref="typewriterEl" class="typewriter-text"></p>
+      <button @click="handleScrollButtonClick" class="hero-button animate-fade-in-slide-up">Lihat Profil Saya</button>
     </div>
-  </section>
+  </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, defineEmits } from 'vue';
+import Typewriter from 'typewriter-effect/dist/core';
 
-const isTitleVisible = ref(false);
-const typedText = ref('');
-const phrases = ["Web Developer", "Human Capital", "Sekretaris", "Adminstration"];
-let phraseIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
+const emit = defineEmits(['scrollToSection']);
 
-const typingSpeed = 150;
-const erasingSpeed = 100;
-const delayBetweenPhrases = 2000;
-
-const typewriter = () => {
-  const currentPhrase = phrases[phraseIndex];
-  let timeout = isDeleting ? erasingSpeed : typingSpeed;
-
-  if (isDeleting) {
-    typedText.value = currentPhrase.substring(0, charIndex - 1);
-    charIndex--;
-  } else {
-    typedText.value = currentPhrase.substring(0, charIndex + 1);
-    charIndex++;
-  }
-
-  if (!isDeleting && charIndex === currentPhrase.length) {
-    isDeleting = true;
-    timeout = delayBetweenPhrases;
-  } else if (isDeleting && charIndex === 0) {
-    isDeleting = false;
-    phraseIndex = (phraseIndex + 1) % phrases.length;
-  }
-
-  setTimeout(typewriter, timeout);
-};
-
-const scrollToProfile = () => {
-  const profileSection = document.querySelector('#profile');
-  if (profileSection) {
-    profileSection.scrollIntoView({ behavior: 'smooth' });
-  }
-};
+const typewriterEl = ref(null);
 
 onMounted(() => {
-  setTimeout(() => {
-    isTitleVisible.value = true;
-  }, 200);
-  setTimeout(typewriter, 800);
+  if (typewriterEl.value) {
+    const typewriter = new Typewriter(typewriterEl.value, {
+      loop: true,
+      delay: 75,
+      deleteSpeed: 50,
+    });
+
+    typewriter
+      .pauseFor(500)
+      .typeString('Human Capital')
+      .pauseFor(2000)
+      .deleteAll()
+      .typeString('Sekretaris')
+      .pauseFor(2000)
+      .deleteAll()
+      .typeString('Administration')
+      .pauseFor(2000)
+      .deleteAll()
+      .typeString('Web Developer')
+      .pauseFor(2500)
+      .start();
+  }
 });
+
+const handleScrollButtonClick = () => {
+  emit('scrollToSection', '#profile');
+};
 </script>
 
-<style>
-#home.hero {
-  padding: 0;
+<style scoped>
+/* Keyframe animation for the fade-in and slide-up effect */
+@keyframes fade-in-slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.hero {
+#hero {
+  position: relative;
+  height: 100vh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 100vh;
-  color: white;
-  position: relative;
-  background-image: url('/bg.jpg');
+  background-image: url('/bg.jpg'); 
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  box-sizing: border-box;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: transparent;
-  z-index: 1;
+  color: #fff;
+  overflow: hidden;
+  /* No padding needed here, we want it edge-to-edge */
 }
 
 .hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 1200px;
-  padding: 0 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem; /* Space between elements */
 }
 
-.hero-title {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  font-size: 3.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  text-shadow: 0 4px 15px rgba(0,0,0,0.5), 0 0 10px rgba(22, 160, 133, 0.5);
+.hero-content h1 {
+  font-size: 4rem;
+  margin: 0;
+  color: #fff;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
 
-.hero-title.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+.typewriter-text {
+  font-size: 2rem;
+  color: #fff; /* Teal color */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  height: 2.5rem; /* Allocate space to prevent layout shift */
 }
 
-.hero-subtitle {
-  font-size: 1.5rem;
-  font-weight: 400;
-  margin-bottom: 2rem;
-  color: #e2e8f0;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.5), 0 0 5px rgba(22, 160, 133, 0.4);
-  height: 2.2rem;
-}
-
-.cursor {
-  display: inline-block;
-  width: 3px;
-  height: 1.5rem;
-  background-color: #16a085;
+/* Styling for the typewriter cursor */
+:deep(.Typewriter__cursor) {
+  color: #fff; /* Match the text color #16a085 */
+  font-size: 2rem;  /* Match the text size */
   animation: blink 1s infinite;
-  margin-left: 4px;
-  vertical-align: middle;
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
 
 .hero-button {
   background-color: #16a085;
   color: white;
-  padding: 1rem 2.5rem;
+  padding: 0.75rem 1.75rem;
   border-radius: 50px;
   text-decoration: none;
-  font-size: 1.1rem;
-  font-weight: 600;
-  box-shadow: 0 5px 15px rgba(22, 160, 133, 0.4);
+  font-size: 1rem;
+  font-weight: 800;
   transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(22, 160, 133, 0.4);
+  display: inline-block;
+  margin-top: 1rem; /* Add some space above the button */
+  border: none; /* Remove default button border */
+  font-family: 'Poppins', sans-serif; /* Ensure font consistency */
   cursor: pointer; /* Ensure cursor is a pointer */
 }
 
 .hero-button:hover {
   background-color: #19b698;
-  transform: translateY(-3px);
-  color: white; /* Explicitly keep text white */
-  box-shadow: 0 8px 25px rgba(22, 160, 133, 0.6), 0 0 15px rgba(22, 160, 133, 0.5); /* Enhanced shadow for glowing effect */
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(22, 160, 133, 0.5);
 }
 
+/* Applying the animation */
+.animate-fade-in-slide-up {
+  animation: fade-in-slide-up 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  opacity: 0; /* Start as invisible */
+}
+
+/* Animation delays */
+h1.animate-fade-in-slide-up {
+  animation-delay: 0.5s; /* Delay for the heading */
+}
+
+.hero-button.animate-fade-in-slide-up {
+  animation-delay: 1.2s; /* Delay for the button, appears after heading */
+}
+
+
+/* Responsive Styles */
 @media (max-width: 768px) {
-  .hero-content {
-    padding: 0 1rem;
-  }
-  .hero-title {
+  .hero-content h1 {
     font-size: 2.5rem;
   }
-  .hero-subtitle {
-    font-size: 1.2rem;
-    height: 1.8rem;
+
+  .typewriter-text {
+    font-size: 1.5rem;
   }
-  .cursor {
-    height: 1.2rem;
+  
+  :deep(.Typewriter__cursor) {
+    font-size: 1.5rem;
   }
 }
 </style>

@@ -3,96 +3,148 @@
     <div class="contact-container">
       <h2 class="section-title">Hubungi Saya</h2>
       <p class="contact-subtitle">Saya selalu terbuka untuk diskusi, kolaborasi, atau peluang baru. Jangan ragu untuk menghubungi saya!</p>
-      <div class="contact-icons">
-        <a @click="openEmail" class="contact-icon-link" aria-label="Email">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/rizkian-dili-septyanto/" class="contact-icon-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
-        </a>
-        <a href="https://github.com/RizkianDS" class="contact-icon-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
-        </a>
+
+      <!-- Form Card -->
+      <div class="form-card">
+        <form @submit.prevent="handleFormSubmit" class="contact-form">
+          <div class="form-group">
+            <label for="email" class="form-label">Email Anda</label>
+            <input id="email" type="email" v-model="form.email" placeholder="contoh@email.com" required class="form-input">
+          </div>
+          <div class="form-group">
+            <label for="message" class="form-label">Pesan Anda</label>
+            <textarea id="message" v-model="form.message" placeholder="Tuliskan pesan Anda di sini..." required class="form-textarea"></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Kirim Pesan</button>
+        </form>
       </div>
-      <footer class="footer-text">
-        <p>&copy; 2025 RDS.</p>
-      </footer>
     </div>
   </section>
 </template>
 
 <script setup>
-const openEmail = () => {
-  window.location.href = 'mailto:rizkiands10@gmail.com';
+import { ref } from 'vue';
+
+const form = ref({
+  email: '',
+  message: ''
+});
+
+const handleFormSubmit = () => {
+  const subject = '[Tawaran Pekerjaan]';
+  const body = `${form.value.message}\n\n---\nEmail Pengirim: ${form.value.email}`;
+  const mailtoLink = `mailto:rizkiands10@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.location.href = mailtoLink;
 };
 </script>
 
 <style scoped>
 #contact {
-  background-color: #2d3748; /* Darker Gray */
-  padding: 6rem 2rem;
+  background-color: #2d3748;
+  padding: 6rem 2rem 4rem; /* Adjusted padding to give space for the footer */
   text-align: center;
 }
 
 .contact-container {
+  max-width: 700px;
   margin: 0 auto;
-  width: 100%;
-  box-sizing: border-box;
 }
 
 .section-title {
-  font-size: 2.5rem;
-  font-weight: 700;
   color: white;
+  font-size: 2.5rem;
   margin-bottom: 1rem;
 }
 
 .contact-subtitle {
   font-size: 1.2rem;
-  color: #a0aec0; /* Light Gray */
+  color: #a0aec0;
   margin-bottom: 3rem;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.contact-icons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2.5rem; /* Increased gap for better spacing */
-  margin-bottom: 4rem;
+/* Form Card */
+.form-card {
+  background-color: #1a202c;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  margin-bottom: 3rem;
+  text-align: left;
 }
 
-.contact-icon-link {
-  cursor: pointer; /* Add pointer cursor to indicate it's clickable */
-  color: #a0aec0; /* Light Gray for default state */
-  transition: color 0.3s ease, transform 0.3s ease;
+.contact-form {
+  width: 100%;
 }
 
-.contact-icon-link:hover {
-  color: #16a085; /* Teal on hover */
-  transform: scale(1.1);
+.form-group {
+  margin-bottom: 1.5rem;
 }
 
-.contact-icon-link svg {
-  width: 40px; /* Increased size */
-  height: 40px;
-  pointer-events: none; /* Crucial fix for click events */
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #e2e8f0;
+  font-weight: 600;
 }
 
-.footer-text {
-  color: #718096; /* Lighter Gray */
-  font-size: 0.9rem;
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #4a5568;
+  background-color: #2d3748;
+  color: #e2e8f0;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #718096;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #16a085;
+  box-shadow: 0 0 15px rgba(22, 160, 133, 0.5);
+}
+
+.form-textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 1rem 2rem;
+  background-color: #16a085;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #117a65;
+  transform: translateY(-2px);
 }
 
 @media (max-width: 768px) {
-  .contact-icons {
-    gap: 2rem;
+  #contact {
+    padding: 4rem 1.5rem 3rem;
   }
-  .contact-icon-link svg {
-    width: 35px;
-    height: 35px;
+  .form-card {
+    padding: 2rem;
   }
 }
 </style>
