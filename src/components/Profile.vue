@@ -66,9 +66,9 @@ onMounted(() => {
 
 .profile-container {
   margin: 0 auto;
-  margin-top: 2rem;
   width: 100%;
   box-sizing: border-box;
+  max-width: 980px; /* Constrain width on larger screens */
 }
 
 .profile-card {
@@ -185,7 +185,7 @@ onMounted(() => {
 
   .profile-image-container {
     width: 200px;
-    height: auto;
+    height: 350px;
   }
 
 }
