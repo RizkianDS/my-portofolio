@@ -1,0 +1,22 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #1a202c; /* Dark Blue */
+  color: #a0aec0; /* Light Gray */
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+    position: relative;
+}
+
+/* Global styles for sections */
+section {
+  padding: 6rem 2rem; /* Re-add padding here */
+  border-bottom: 1px solid #2d3748; /* Subtle separator */
+}
+
+section:last-of-type {
+  border-bottom: none;
+}
