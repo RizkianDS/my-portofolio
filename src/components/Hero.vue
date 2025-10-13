@@ -56,7 +56,6 @@ onMounted(() => {
 </script>
 
 <style>
-/* Ensure the hero section itself has no padding to allow edge-to-edge background */
 #home.hero {
   padding: 0;
 }
@@ -73,7 +72,7 @@ onMounted(() => {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  box-sizing: border-box; /* Better box model handling */
+  box-sizing: border-box;
 }
 
 .hero::before {
@@ -84,12 +83,11 @@ onMounted(() => {
   z-index: 1;
 }
 
-/* Re-introduce padding to the content container */
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 1200px; /* Optional: constrain content width on very large screens */
-  padding: 0 2rem; /* Restore horizontal padding */
+  max-width: 1200px;
+  padding: 0 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -116,7 +114,7 @@ onMounted(() => {
   margin-bottom: 2rem;
   color: #e2e8f0;
   text-shadow: 0 2px 10px rgba(0,0,0,0.5), 0 0 5px rgba(22, 160, 133, 0.4);
-  height: 2.2rem; /* Fixed height to prevent vertical jank */
+  height: 2.2rem;
 }
 
 .cursor {
@@ -142,18 +140,20 @@ onMounted(() => {
   text-decoration: none;
   font-size: 1.1rem;
   font-weight: 600;
-  transition: background-color 0.3s ease, transform 0.3s ease;
   box-shadow: 0 5px 15px rgba(22, 160, 133, 0.4);
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .hero-button:hover {
   background-color: #19b698;
   transform: translateY(-3px);
+  color: white; /* Explicitly keep text white */
+  box-shadow: 0 8px 25px rgba(22, 160, 133, 0.6), 0 0 15px rgba(22, 160, 133, 0.5); /* Enhanced shadow for glowing effect */
 }
 
 @media (max-width: 768px) {
   .hero-content {
-    padding: 0 1rem; /* Adjust padding for smaller screens */
+    padding: 0 1rem;
   }
   .hero-title {
     font-size: 2.5rem;
