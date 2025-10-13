@@ -5,7 +5,7 @@
       <p class="hero-subtitle">
         {{ typedText }}<span class="cursor"></span>
       </p>
-      <a href="#profile" class="hero-button">Lihat Profil Saya</a>
+      <a @click="scrollToProfile" class="hero-button">Lihat Profil Saya</a>
     </div>
   </section>
 </template>
@@ -45,6 +45,13 @@ const typewriter = () => {
   }
 
   setTimeout(typewriter, timeout);
+};
+
+const scrollToProfile = () => {
+  const profileSection = document.querySelector('#profile');
+  if (profileSection) {
+    profileSection.scrollIntoView({ behavior: 'smooth' });
+  }
 };
 
 onMounted(() => {
@@ -142,6 +149,7 @@ onMounted(() => {
   font-weight: 600;
   box-shadow: 0 5px 15px rgba(22, 160, 133, 0.4);
   transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer; /* Ensure cursor is a pointer */
 }
 
 .hero-button:hover {

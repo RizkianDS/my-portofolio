@@ -10,6 +10,12 @@
           <p>
             Saya adalah seorang pengembang web dengan pengalaman dalam menciptakan aplikasi web yang modern dan responsif. Saya bersemangat tentang teknologi dan selalu berusaha untuk mempelajari hal-hal baru.
           </p>
+          <div class="category-tags">
+            <span class="tag">HR</span>
+            <span class="tag">Sekretaris</span>
+            <span class="tag">Administration</span>
+            <span class="tag">IT</span>
+          </div>
         </div>
       </div>
     </div>
@@ -45,9 +51,9 @@ onMounted(() => {
 
 <style>
 #profile {
-  background-color: transparent;
+  background-color: transparent; 
   padding: 6rem 2rem;
-  overflow-x: hidden; /* Prevent horizontal scrollbar issues during animation */
+  overflow-x: hidden; 
 }
 
 .profile-container {
@@ -58,7 +64,7 @@ onMounted(() => {
 }
 
 .profile-card {
-  background-color: #1a202c;
+  background-color: #edf2f7; /* Off-white background */
   border-radius: 15px;
   display: flex;
   align-items: center;
@@ -68,7 +74,6 @@ onMounted(() => {
   width: 100%;
   box-sizing: border-box;
   
-  /* Animation styles */
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
@@ -81,18 +86,21 @@ onMounted(() => {
 
 .profile-image-container {
   flex-shrink: 0;
-  width: 250px;
-  height: 350px;
+  width: 250px; /* Keep the width */
+  height: 350px; /* Adjust height to be automatic */
   border-radius: 10px;
   overflow: hidden;
 }
 
 .profile-image-container img {
   width: 100%;
-  height: 230%;
-  object-fit: cover;
-  object-position: center 30%;
-  transform: scale(1.2);
+  height: 220%;
+  object-fit: cover; /* Cover will now work correctly without cropping */
+  display: block; /* Remove any extra space below the image */
+}
+
+.profile-info {
+    text-align: center; /* Center align all text within the info section */
 }
 
 .profile-info h2 {
@@ -102,8 +110,36 @@ onMounted(() => {
 }
 
 .profile-info p {
-  color: #a0aec0;
+  color: #2d3748; /* Dark gray text for readability on light background */
   line-height: 1.6;
+}
+
+.category-tags {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center; /* Center the tags */
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4a5568;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.tag:hover {
+  background-color: #16a085;
+  color: #fff;
+  border-color: #16a085;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(22, 160, 133, 0.3);
 }
 
 /* Responsive adjustments */
@@ -115,7 +151,8 @@ onMounted(() => {
 
   .profile-image-container {
     width: 200px;
-    height: 280px;
+    height: auto;
   }
+
 }
 </style>
