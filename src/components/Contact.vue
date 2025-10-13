@@ -6,7 +6,7 @@
 
       <!-- Form Card -->
       <div class="form-card">
-        <form @submit.prevent="handleFormSubmit" class="contact-form">
+        <div class="contact-form">
           <div class="form-group">
             <label for="email" class="form-label">Email Anda</label>
             <input id="email" type="email" v-model="form.email" placeholder="contoh@email.com" required class="form-input">
@@ -15,27 +15,38 @@
             <label for="message" class="form-label">Pesan Anda</label>
             <textarea id="message" v-model="form.message" placeholder="Tuliskan pesan Anda di sini..." required class="form-textarea"></textarea>
           </div>
-          <button type="submit" class="submit-btn">Kirim Pesan</button>
-        </form>
+          <a :href="mailtoLink" @click="handleSendMessage" class="submit-btn">Kirim Pesan</a>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 const form = ref({
   email: '',
   message: ''
 });
 
-const handleFormSubmit = () => {
-  const subject = '[Tawaran Pekerjaan]';
-  const body = `${form.value.message}\n\n---\nEmail Pengirim: ${form.value.email}`;
-  const mailtoLink = `mailto:rizkiands10@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  window.location.href = mailtoLink;
+const mailtoLink = computed(() => {
+  // Only generate the link if the form is valid
+  if (form.value.email && form.value.message) {
+    const subject = '[Tawaran Pekerjaan]';
+    const body = `${form.value.message}\n\n---\nDikirim dari: ${form.value.email}`;
+    return `mailto:rizkiands10@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
+  return '#'; // Return a placeholder if the form is invalid
+});
+
+const handleSendMessage = (event) => {
+  if (!form.value.email || !form.value.message) {
+    event.preventDefault(); // Stop the link from being followed
+    alert('Harap lengkapi email dan pesan Anda terlebih dahulu.');
+  }
 };
+
 </script>
 
 <style scoped>
@@ -122,15 +133,18 @@ const handleFormSubmit = () => {
 }
 
 .submit-btn {
+  display: block; /* Make the anchor tag behave like a block element */
   width: 100%;
   padding: 1rem 2rem;
   background-color: #16a085;
   color: white;
-  border: none;
   border-radius: 8px;
   font-size: 1.1rem;
   font-weight: 700;
   cursor: pointer;
+  text-decoration: none; /* Remove underline from the link */
+  box-sizing: border-box; /* Ensure padding is included in the width */
+  text-align: center; /* Center the text inside the button */
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
