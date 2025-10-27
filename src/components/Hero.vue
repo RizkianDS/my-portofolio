@@ -29,7 +29,7 @@ onMounted(() => {
       .typeString('Human Capital')
       .pauseFor(2000)
       .deleteAll()
-      .typeString('Sekretaris')
+      .typeString('Secretary')
       .pauseFor(2000)
       .deleteAll()
       .typeString('Administration')

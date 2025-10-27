@@ -12,7 +12,7 @@
           </p>
           <div class="category-tags">
             <span class="tag">HR</span>
-            <span class="tag">Sekretaris</span>
+            <span class="tag">Secretary</span>
             <span class="tag">Administration</span>
             <span class="tag">IT</span>
           </div>
